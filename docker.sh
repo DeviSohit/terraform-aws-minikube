@@ -52,4 +52,16 @@ usermod -aG docker centos &>>$LOGFILE
 
 VALIDATE $? "centos user added to docker group"
 
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" &>>$LOGFILE
+
+VALIDATE $? "Download latest version of kubectl"
+
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl &>>$LOGFILE
+
+VALIDATE $? "kubectl installed"
+
+kubectl version --client &>>$LOGFILE
+
+VALIDATE $? "kubectl version"
+
 echo -e "$R Please logout and login again $N"

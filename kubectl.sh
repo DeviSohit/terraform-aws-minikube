@@ -37,5 +37,9 @@ install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl &>>$LOGFILE
 
 VALIDATE $? "kubectl installed"
 
+kubectl version --client &>>$LOGFILE
+
+VALIDATE $? "kubectl version"
+
 
 
